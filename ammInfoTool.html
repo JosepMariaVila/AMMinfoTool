@@ -1,0 +1,215 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AMM INFO TOOL</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #ce91e2;
+      }
+    </style>
+    <script src="https://unpkg.com/xrpl@2.2.3"></script>
+    <script src="index.js"></script>
+  </head>
+  <body>
+    <div class="container mt-2 pb-4">
+      <p></p>
+      <h1>AMM INFO TOKEN/TOKEN</h1>
+      <button class="btn btn-primary" style="text-align: left" id="step1">
+        Step 1. Paste Asset 1 currency code:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="step1field"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+      <p></p>
+
+      <button class="btn btn-primary" style="text-align: left" id="step2">
+        Step 2. Paste Asset 1 issuer:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="step2field"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+      <p></p>
+
+      <button class="btn btn-warning" style="text-align: left" id="step3">
+        Step 3. Paste Asset 2 currency code:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="step3field"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+      <p></p>
+
+      <button class="btn btn-warning" style="text-align: left" id="step4">
+        Step 4. Paste Asset 2 issuer:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="step4field"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+      <p></p>
+
+      <button
+        class="btn btn-success"
+        style="text-align: left"
+        id="getamminfo"
+        onClick="main()"
+      >
+        <p></p>
+        Step 5. Click here to get AMM Info
+        <p></p>
+        <table>
+          <tr valign="top">
+            <td>
+              <p align="left">
+                <textarea id="getamminforesult" cols="65" rows="8"></textarea>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </button>
+      <p></p>
+
+      <h1>AMM INFO XRP/TOKEN</h1>
+      <button class="btn btn-primary" style="text-align: left" id="xrp1">
+        Step 1. Currency code: XRP
+      </button>
+      <p></p>
+
+      <button class="btn btn-primary" style="text-align: left" id="xrp2">
+        Step 2. Paste the AMM account address:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="xrp3"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+
+      <p></p>
+      <button class="btn btn-warning" style="text-align: left" id="xrp4">
+        Step 3. Paste Asset 2 currency code:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="xrp5"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+
+      <p></p>
+      <button class="btn btn-warning" style="text-align: left" id="xrp6">
+        Step 4. Paste Asset 2 issuer:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="xrp7"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+
+      <p></p>
+      <button
+        class="btn btn-success"
+        style="text-align: left"
+        id="getammXRPinfo"
+        onClick="main3()"
+      >
+        <p></p>
+        Step 5. Click here to get AMM Info
+        <p></p>
+        <table>
+          <tr valign="top">
+            <td>
+              <p align="left">
+                <textarea
+                  id="getammXRPinforesult"
+                  cols="65"
+                  rows="8"
+                ></textarea>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </button>
+      <p></p>
+
+      <h1>ACCOUNT LINES INFO</h1>
+      <button class="btn btn-primary" style="text-align: left" id="lines1">
+        Step 1. Paste the Address you want to check Trustlines:
+        <td>
+          <input
+            type="text"
+            style="display: block"
+            id="lines1field"
+            value=""
+            size="63"
+          />
+        </td>
+      </button>
+
+      <p></p>
+
+      <button
+        class="btn btn-success"
+        style="text-align: left"
+        id="lines2"
+        onClick="main2()"
+      >
+        <p></p>
+        Step 2. Click here to get Account Lines Info
+        <p></p>
+        <table>
+          <tr valign="top">
+            <td>
+              <p align="left">
+                <textarea id="lines2field" cols="65" rows="20"></textarea>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </button>
+      <p></p>
+
+      <a href="https://skunk-proper-smoothly.ngrok-free.app/tools"
+        >Go back to Ridworld Tools</a
+      >
+    </div>
+  </body>
+</html>
