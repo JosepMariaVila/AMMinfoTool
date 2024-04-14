@@ -40,12 +40,17 @@ async function main() {
       console.log(
         `No AMM exists yet for the pair (This is probably as expected.)`
       );
+      document.getElementById(
+        "getamminforesult").value = `No AMM exists yet for the pair (This is probably as expected.)`;
     } else {
       throw err;
     }
     // await client.disconnect();
   }
  client.disconnect();
+ document.getElementById("clear1").onclick = () => {
+  window.location.reload();
+  };
 }
 main();
 
@@ -69,7 +74,7 @@ async function main3() {
     },
     ledger_index: "validated",      
   }
-  try {
+  try {{
     const amm_info_result = await client.request(amm_info_request);
     console.log(amm_info_result);
     const lp_token = amm_info_result.result.amm.lp_token;
@@ -85,27 +90,33 @@ async function main3() {
     try {
       const amm_info_result2 = await client.request(amm_info_request2);
       console.log(amm_info_result2);
-      const balance = amm_info_result2.result.account_data.Balance;
-      await client.disconnect();
-    }
+      const balance = amm_info_result2.result.account_data.Balance;    
 
     //document.getElementById("getamminforesult").value = amm_info_result.result;
     document.getElementById(
       "getammXRPinforesult"
     ).value = `The AMM account ${lp_token.issuer} \nhas ${lp_token.value} LP tokens and uses the currency \ncode ${lp_token.currency}. \nIn its pool, the AMM holds ${balance/1000000} XRP and \n${amount2.value} of the ${amount2.currency} token \nissued by ${amount2.issuer}`;
-  
-  } catch (err) {
+    document.getElementById("clear3").onclick = () => {
+      window.location.reload();
+    };
+  }} catch (err) {
     if (err.data.error === "actNotFound") {
       console.log(
         `No AMM exists yet for the pair (This is probably as expected.)`
       );
+      document.getElementById(
+        "getammXRPinforesult").value = `No AMM exists yet for the pair (This is probably as expected.)`
     } else {
       throw err;
     }
-    // await client.disconnect();
-  client.disconnect();
-}
+  
+    client.disconnect();
+    document.getElementById("clear3").onclick = () => {
+      window.location.reload();
+    };
+  }}
 main3();
+
 
 
 document.getElementById("lines2").onclick = () => {
@@ -163,6 +174,9 @@ async function main2() {
   }
   
   client.disconnect();
+  document.getElementById("clear2").onclick = () => {
+  window.location.reload();
+  };
 }
 main2();
 

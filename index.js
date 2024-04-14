@@ -79,6 +79,7 @@ function main() {
                     err_1 = _a.sent();
                     if (err_1.data.error === "actNotFound") {
                         console.log("No AMM exists yet for the pair (This is probably as expected.)");
+                        document.getElementById("getamminforesult").value = "No AMM exists yet for the pair (This is probably as expected.)";
                     }
                     else {
                         throw err_1;
@@ -86,6 +87,9 @@ function main() {
                     return [3 /*break*/, 5];
                 case 5:
                     client.disconnect();
+                    document.getElementById("clear1").onclick = function () {
+                        window.location.reload();
+                    };
                     return [2 /*return*/];
             }
         });
@@ -97,7 +101,7 @@ document.getElementById("getammXRPinfo").onclick = function () {
 };
 function main3() {
     return __awaiter(this, void 0, void 0, function () {
-        var client, amm_info_request, amm_info_result, lp_token, amount, amount2, amm_info_request2, amm_info_result2, balance;
+        var client, amm_info_request, amm_info_result, lp_token, amount, amount2, amm_info_request2, amm_info_result2, balance, err_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -118,7 +122,7 @@ function main3() {
                     };
                     _a.label = 2;
                 case 2:
-                    _a.trys.push([2, , 4, 5]);
+                    _a.trys.push([2, 8, , 9]);
                     return [4 /*yield*/, client.request(amm_info_request)];
                 case 3:
                     amm_info_result = _a.sent();
@@ -126,45 +130,45 @@ function main3() {
                     lp_token = amm_info_result.result.amm.lp_token;
                     amount = amm_info_result.result.amm.amount;
                     amount2 = amm_info_result.result.amm.amount2;
-                    return [3 /*break*/, 5];
-                case 4: return [7 /*endfinally*/];
-                case 5:
                     amm_info_request2 = {
                         command: "account_info",
                         account: xrp3.value,
                         ledger_index: "validated",
                     };
-                    _a.label = 6;
-                case 6:
-                    _a.trys.push([6, , 9, 10]);
+                    _a.label = 4;
+                case 4:
+                    _a.trys.push([4, , 6, 7]);
                     return [4 /*yield*/, client.request(amm_info_request2)];
-                case 7:
+                case 5:
                     amm_info_result2 = _a.sent();
                     console.log(amm_info_result2);
                     balance = amm_info_result2.result.account_data.Balance;
-                    return [4 /*yield*/, client.disconnect()];
-                case 8:
-                    _a.sent();
-                    return [3 /*break*/, 10];
-                case 9: return [7 /*endfinally*/];
-                case 10:
                     //document.getElementById("getamminforesult").value = amm_info_result.result;
                     document.getElementById("getammXRPinforesult").value = "The AMM account ".concat(lp_token.issuer, " \nhas ").concat(lp_token.value, " LP tokens and uses the currency \ncode ").concat(lp_token.currency, ". \nIn its pool, the AMM holds ").concat(balance / 1000000, " XRP and \n").concat(amount2.value, " of the ").concat(amount2.currency, " token \nissued by ").concat(amount2.issuer);
-                    return [2 /*return*/];
+                    document.getElementById("clear3").onclick = function () {
+                        window.location.reload();
+                    };
+                    return [3 /*break*/, 7];
+                case 6: return [7 /*endfinally*/];
+                case 7: return [3 /*break*/, 9];
+                case 8:
+                    err_2 = _a.sent();
+                    if (err_2.data.error === "actNotFound") {
+                        console.log("No AMM exists yet for the pair (This is probably as expected.)");
+                        document.getElementById("getammXRPinforesult").value = "No AMM exists yet for the pair (This is probably as expected.)";
+                    }
+                    else {
+                        throw err_2;
+                    }
+                    client.disconnect();
+                    document.getElementById("clear3").onclick = function () {
+                        window.location.reload();
+                    };
+                    return [3 /*break*/, 9];
+                case 9: return [2 /*return*/];
             }
         });
     });
-}
-try { }
-catch (err) {
-    if (err.data.error === "actNotFound") {
-        console.log("No AMM exists yet for the pair (This is probably as expected.)");
-    }
-    else {
-        throw err;
-    }
-    // await client.disconnect();
-    client.disconnect();
 }
 main3();
 document.getElementById("lines2").onclick = function () {
@@ -218,6 +222,9 @@ function main2() {
                     return [3 /*break*/, 3];
                 case 5:
                     client.disconnect();
+                    document.getElementById("clear2").onclick = function () {
+                        window.location.reload();
+                    };
                     return [2 /*return*/];
             }
         });
