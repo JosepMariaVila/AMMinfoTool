@@ -7,7 +7,7 @@ async function main() {
   const client = new xrpl.Client("wss://xrplcluster.com/");
   await client.connect();
 
-  // Check if AMM already exists ----------------------------------------------
+  // Check if AMM already exists (TOKEN/TOKEN) ----------------------------------------------
   const amm_info_request = {
     command: "amm_info",
     asset: {
@@ -62,7 +62,7 @@ async function main3() {
   const client = new xrpl.Client("wss://xrplcluster.com/");
   await client.connect();
 
-  // Check if AMM already exists ----------------------------------------------
+  // Check if AMM already exists (XRP/TOKEN) ----------------------------------------------
   const amm_info_request = {
     command: "amm_info",
     asset: {
@@ -118,7 +118,7 @@ async function main3() {
 main3();
 
 
-
+  // Check if TRUSTLINES ----------------------------------------------
 document.getElementById("lines2").onclick = () => {
   main2();
 };
