@@ -231,4 +231,140 @@ function main2() {
     });
 }
 main2();
+document.getElementById("step20").onclick = function () {
+    main10();
+};
+function main10() {
+    return __awaiter(this, void 0, void 0, function () {
+        var client, amm_info_request, amm_info_result, lp_token, amount, amount2, err_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    client = new xrpl.Client("wss://xrplcluster.com/");
+                    return [4 /*yield*/, client.connect()];
+                case 1:
+                    _a.sent();
+                    amm_info_request = {
+                        command: "amm_info",
+                        asset: {
+                            currency: step11.value,
+                            issuer: step13.value,
+                        },
+                        asset2: {
+                            currency: step15.value,
+                            issuer: step17.value,
+                        },
+                        ledger_index: step19.value,
+                    };
+                    _a.label = 2;
+                case 2:
+                    _a.trys.push([2, 4, , 5]);
+                    return [4 /*yield*/, client.request(amm_info_request)];
+                case 3:
+                    amm_info_result = _a.sent();
+                    console.log(amm_info_result);
+                    lp_token = amm_info_result.result.amm.lp_token;
+                    amount = amm_info_result.result.amm.amount;
+                    amount2 = amm_info_result.result.amm.amount2;
+                    console.log("The AMM account ".concat(lp_token.issuer, " had ").concat(lp_token.value, " total\n               LP tokens outstanding, and used the currency code ").concat(lp_token.currency, "."));
+                    console.log("In its pool, the AMM had ".concat(amount.value, " ").concat(amount.currency, " issued by ").concat(amount.issuer, "\n               and ").concat(amount2.value, " ").concat(amount2.currency, " issued by ").concat(amount2.issuer));
+                    //document.getElementById("getamminforesult").value = amm_info_result.result;
+                    document.getElementById("step21").value = "In the specified ledger index the AMM account ".concat(lp_token.issuer, " \nhad ").concat(lp_token.value, " LP tokens, currency \ncode ").concat(lp_token.currency, ". \nIn its pool, the AMM had ").concat(amount.value, " of the ").concat(amount.currency, " token issued by ").concat(amount.issuer, " and \n").concat(amount2.value, " of the ").concat(amount2.currency, " token issued by ").concat(amount2.issuer);
+                    return [3 /*break*/, 5];
+                case 4:
+                    err_3 = _a.sent();
+                    if (err_3.data.error === "actNotFound") {
+                        console.log("No AMM exists yet for the pair (This is probably as expected.)");
+                        document.getElementById("step21").value = "No AMM exists yet for the pair (This is probably as expected.)";
+                    }
+                    else {
+                        throw err_3;
+                    }
+                    return [3 /*break*/, 5];
+                case 5:
+                    client.disconnect();
+                    document.getElementById("clear4").onclick = function () {
+                        window.location.reload();
+                    };
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+main100();
+document.getElementById("step110").onclick = function () {
+    main100();
+};
+function main100() {
+    return __awaiter(this, void 0, void 0, function () {
+        var client, amm_info_request, amm_info_result, lp_token, amount, amount2, amm_info_request2, amm_info_result2, balance, err_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    client = new xrpl.Client("wss://xrplcluster.com/");
+                    return [4 /*yield*/, client.connect()];
+                case 1:
+                    _a.sent();
+                    amm_info_request = {
+                        command: "amm_info",
+                        asset: {
+                            currency: "XRP",
+                        },
+                        asset2: {
+                            currency: step105.value,
+                            issuer: step107.value,
+                        },
+                        ledger_index: step109.value,
+                    };
+                    _a.label = 2;
+                case 2:
+                    _a.trys.push([2, 8, , 9]);
+                    return [4 /*yield*/, client.request(amm_info_request)];
+                case 3:
+                    amm_info_result = _a.sent();
+                    console.log(amm_info_result);
+                    lp_token = amm_info_result.result.amm.lp_token;
+                    amount = amm_info_result.result.amm.amount;
+                    amount2 = amm_info_result.result.amm.amount2;
+                    amm_info_request2 = {
+                        command: "account_info",
+                        account: step103.value,
+                        ledger_index: step109.value,
+                    };
+                    _a.label = 4;
+                case 4:
+                    _a.trys.push([4, , 6, 7]);
+                    return [4 /*yield*/, client.request(amm_info_request2)];
+                case 5:
+                    amm_info_result2 = _a.sent();
+                    console.log(amm_info_result2);
+                    balance = amm_info_result2.result.account_data.Balance;
+                    //document.getElementById("getamminforesult").value = amm_info_result.result;
+                    document.getElementById("step111").value = "In the specified ledger index the AMM account ".concat(lp_token.issuer, " \nhad ").concat(lp_token.value, " LP tokens, currency \ncode ").concat(lp_token.currency, ". \nIn its pool, the AMM had ").concat(balance / 1000000, " XRP and \n").concat(amount2.value, " of the ").concat(amount2.currency, " token issued by ").concat(amount2.issuer);
+                    document.getElementById("clear5").onclick = function () {
+                        window.location.reload();
+                    };
+                    return [3 /*break*/, 7];
+                case 6: return [7 /*endfinally*/];
+                case 7: return [3 /*break*/, 9];
+                case 8:
+                    err_4 = _a.sent();
+                    if (err_4.data.error === "actNotFound") {
+                        console.log("No AMM exists yet for the pair (This is probably as expected.)");
+                        document.getElementById("step111").value = "No AMM exists yet for the pair (This is probably as expected.)";
+                    }
+                    else {
+                        throw err_4;
+                    }
+                    client.disconnect();
+                    document.getElementById("clear5").onclick = function () {
+                        window.location.reload();
+                    };
+                    return [3 /*break*/, 9];
+                case 9: return [2 /*return*/];
+            }
+        });
+    });
+}
+main100();
 //# sourceMappingURL=index.js.map
