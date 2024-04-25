@@ -231,6 +231,66 @@ function main2() {
     });
 }
 main2();
+document.getElementById("lines54").onclick = function () {
+    main50();
+};
+function main50() {
+    return __awaiter(this, void 0, void 0, function () {
+        var client, lines, account_lines_result, trustlineResponse, i;
+        var _a, _b, _c, _d;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
+                case 0:
+                    client = new xrpl.Client("wss://xrplcluster.com/");
+                    return [4 /*yield*/, client.connect()];
+                case 1:
+                    _e.sent();
+                    lines = [];
+                    account_lines_result = {
+                        command: "account_lines",
+                        account: lines51.value,
+                        limit: 200,
+                        // Tip: To look up only the new AMM's LP Tokens, uncomment:
+                        peer: lines53.value,
+                        ledger_index: "validated",
+                    };
+                    return [4 /*yield*/, client.request(account_lines_result)];
+                case 2:
+                    trustlineResponse = _e.sent();
+                    console.log(trustlineResponse.result.lines);
+                    document.getElementById("lines55").value = JSON.stringify(trustlineResponse.result.lines, null, 2);
+                    if (!((_a = trustlineResponse === null || trustlineResponse === void 0 ? void 0 : trustlineResponse.result) === null || _a === void 0 ? void 0 : _a.lines)) return [3 /*break*/, 5];
+                    lines = lines.concat((_b = trustlineResponse === null || trustlineResponse === void 0 ? void 0 : trustlineResponse.result) === null || _b === void 0 ? void 0 : _b.lines);
+                    i = 0;
+                    if (!trustlineResponse.result.marker) return [3 /*break*/, 5];
+                    _e.label = 3;
+                case 3:
+                    if (!trustlineResponse.result.marker) return [3 /*break*/, 5];
+                    account_lines_result.marker = trustlineResponse.result.marker;
+                    account_lines_result.ledger_index =
+                        trustlineResponse.result.ledger_index;
+                    console.log("additional calls: " + ++i);
+                    return [4 /*yield*/, client.request(account_lines_result)];
+                case 4:
+                    trustlineResponse = _e.sent();
+                    if ((_c = trustlineResponse === null || trustlineResponse === void 0 ? void 0 : trustlineResponse.result) === null || _c === void 0 ? void 0 : _c.lines) {
+                        lines = lines.concat((_d = trustlineResponse === null || trustlineResponse === void 0 ? void 0 : trustlineResponse.result) === null || _d === void 0 ? void 0 : _d.lines);
+                    }
+                    console.log(lines);
+                    //document.getElementById("resultField").value = lines.balance;
+                    document.getElementById("lines55").value = JSON.stringify(lines, null, 2);
+                    return [3 /*break*/, 3];
+                case 5:
+                    client.disconnect();
+                    document.getElementById("clear50").onclick = function () {
+                        window.location.reload();
+                    };
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+main50();
 document.getElementById("step20").onclick = function () {
     main10();
 };
@@ -291,7 +351,7 @@ function main10() {
         });
     });
 }
-main100();
+main10();
 document.getElementById("step110").onclick = function () {
     main100();
 };

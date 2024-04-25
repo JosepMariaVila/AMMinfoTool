@@ -181,6 +181,72 @@ async function main2() {
 main2();
 
 
+
+
+document.getElementById("lines54").onclick = () => {
+  main50();
+};
+async function main50() {
+  const client = new xrpl.Client("wss://xrplcluster.com/");
+  await client.connect();
+
+  let lines = [];
+
+  const account_lines_result = {
+    command: "account_lines",
+    account: lines51.value,
+    limit: 200,
+    // Tip: To look up only the new AMM's LP Tokens, uncomment:
+    peer: lines53.value,
+    ledger_index: "validated",
+  };
+  
+  let trustlineResponse = await client.request(account_lines_result);
+  
+  console.log(trustlineResponse.result.lines);
+  document.getElementById("lines55").value = JSON.stringify(trustlineResponse.result.lines,
+    null,
+    2
+  );
+
+  if (trustlineResponse?.result?.lines) {
+    lines = lines.concat(trustlineResponse?.result?.lines);
+
+    //check for marker
+    let i = 0;
+    if (trustlineResponse.result.marker) {
+      while (trustlineResponse.result.marker) {
+        account_lines_result.marker = trustlineResponse.result.marker;
+        account_lines_result.ledger_index =
+          trustlineResponse.result.ledger_index;
+
+        console.log("additional calls: " + ++i);
+
+        trustlineResponse = await client.request(account_lines_result);
+
+        if (trustlineResponse?.result?.lines) {
+          lines = lines.concat(trustlineResponse?.result?.lines);
+        }
+        console.log(lines);
+        //document.getElementById("resultField").value = lines.balance;
+        document.getElementById("lines55").value = JSON.stringify(lines,
+          null,
+          2
+        );
+      }
+    }
+  }
+  
+  client.disconnect();
+  document.getElementById("clear50").onclick = () => {
+  window.location.reload();
+  };
+}
+main50();
+
+
+
+
 document.getElementById("step20").onclick = () => {
   main10();
 };
@@ -233,7 +299,7 @@ async function main10() {
   window.location.reload();
   };
 }
-main100();
+main10();
 
 document.getElementById("step110").onclick = () => {
   main100();
